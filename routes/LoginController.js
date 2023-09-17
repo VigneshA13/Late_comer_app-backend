@@ -1,23 +1,19 @@
 const express = require("express");
 const route = express.Router();
-const db = require("../db");
+
+const service = require("../services/Staff");
 
 route.post("/login", async (req, res) => {
   const { name, password } = req.body;
-  await db
-    .query(
-      "SELECT * FROM staff WHERE name = '" +
-        name +
-        "' AND password = '" +
-        password +
-        "'"
-    )
-    .then((data) => {
-      res.send(data[0]);
-      console.log(data[0]);
-    })
-    .catch((err) => console.log(err));
+  const row = await service.SelectStaff(name, password);
+  if (row.length == 1) {
+    const [data] = row;
+    console.log("Staff ID : " + data.id);
+    res.send({ staffId: data.id });
+  } else {
+    console.log("Invalid username or password.");
+    res.send("Invalid username or password.");
+  }
 });
-route.post("/signup", (req, res) => res.send("hello"));
 
 module.exports = route;

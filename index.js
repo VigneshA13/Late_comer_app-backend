@@ -5,11 +5,13 @@ const cors = require("cors");
 
 const db = require("./db");
 const login = require("./routes/LoginController");
+const stud = require("./routes/StudentContoller");
 
 app.use(bp());
 app.use(cors());
 
 app.use("/staff", login);
+app.use("/student", stud);
 
 app.listen(9000, () => {
   console.log("Server running on port 9000...");
