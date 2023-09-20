@@ -3,7 +3,7 @@ const db = require("../db");
 module.exports.SelectStaff = async (name, password) => {
   const [data] = await db
     .query(
-      "SELECT * FROM staff WHERE name = '" +
+      "SELECT * FROM staff WHERE facultyid = '" +
         name +
         "' AND password = '" +
         password +

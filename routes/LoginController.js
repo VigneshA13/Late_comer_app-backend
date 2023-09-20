@@ -9,7 +9,7 @@ route.post("/login", async (req, res) => {
   if (row.length == 1) {
     const [data] = row;
     console.log("Staff ID : " + data.id);
-    res.send({ staffId: data.id });
+    res.send({ staffId: data.id, staffName: data.name });
   } else {
     console.log("Invalid username or password.");
     res.send("Invalid username or password.");
